@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Sidebar } from "../Sidebar/Sidebar";
 import styles from './Layout.module.css';
 
 const Layout: React.FC = props => {

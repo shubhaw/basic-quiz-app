@@ -1,6 +1,13 @@
 import * as React from "react";
-import styles from "./AnswerPanel.module.css";
-import { Stack, DefaultButton, IStackTokens } from "office-ui-fabric-react";
+import {
+	Stack,
+	DefaultButton,
+	IStackTokens,
+	IButtonStyles,
+	PrimaryButton,
+	IIconProps,
+	initializeIcons
+} from "office-ui-fabric-react";
 
 export interface IAnswerPanelProps {
 	answer1: string;
@@ -11,13 +18,50 @@ export interface IAnswerPanelProps {
 }
 
 const stackTokens: IStackTokens = { childrenGap: 20 };
+const buttonStyle: IButtonStyles = {
+	root: {
+		height: "auto",
+		width: "263px",
+		padding: "15px 10px"
+	}
+};
+
+const iconButtonStyle: IButtonStyles = {
+    ...buttonStyle,
+    flexContainer: {
+        flexDirection: 'row-reverse'
+    }
+}
+
+const backButtonColor = '#AAA'
+
+initializeIcons();
+
+const backIcon: IIconProps = { iconName: "Back" };
+const nextIcon: IIconProps = { iconName: "Forward" };
+
 const AnswerPanel: React.FC<IAnswerPanelProps> = props => {
 	return (
 		<Stack horizontal wrap tokens={stackTokens}>
-			<DefaultButton text={props.answer1} />
-			<DefaultButton text={props.answer2} />
-			<DefaultButton text={props.answer3} />
-			<DefaultButton text={props.answer4} />
+			<DefaultButton styles={buttonStyle} text={props.answer1} />
+			<DefaultButton styles={buttonStyle} text={props.answer2} />
+			<DefaultButton styles={buttonStyle} text={props.answer3} />
+			<DefaultButton styles={buttonStyle} text={props.answer4} />
+			<DefaultButton
+				iconProps={backIcon}
+                styles={buttonStyle}
+                style={
+                    {
+                        backgroundColor: `${backButtonColor}`
+                    }
+                }
+				text={"Back"}
+			/>
+			<PrimaryButton
+				iconProps={nextIcon}
+				styles={iconButtonStyle}
+				text={"Next"}
+			/>
 		</Stack>
 	);
 };
